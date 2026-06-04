@@ -3,10 +3,11 @@ import getpass
 import os
 from dotenv import load_dotenv
 
-load_dotenv("../.env")
+load_dotenv()
 
-if "GOOGLE_API_KEY" not in os.environ:
-    os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter your Google AI API key: ")
+
+# if "GOOGLE_API_KEY" not in os.environ:
+#     os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter your Google AI API key: ")
 
 model = ChatGoogleGenerativeAI(
     model = "gemini-3.5-flash"
