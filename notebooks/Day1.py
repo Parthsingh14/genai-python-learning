@@ -1,3 +1,4 @@
+# This script demonstrates a simple Google Gemini chat interaction using LangChain
 from langchain_google_genai import ChatGoogleGenerativeAI
 import getpass
 import os
@@ -13,5 +14,10 @@ model = ChatGoogleGenerativeAI(
     model = "gemini-3.5-flash"
 )
 
-res = model.invoke("Who is the PM of india")
-print(res.content[0]["text"])
+messages = [
+    ("system", "You are a senior expert AI Engineer"),
+    ("human", "What is the future of your domain"),
+]
+
+res = model.invoke(messages)
+print(res.text)
