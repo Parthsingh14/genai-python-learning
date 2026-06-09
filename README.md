@@ -134,7 +134,7 @@ GENAI-PRACTICE/
 
 Projects will be added progressively while learning:
 
-* [ ] QnA Chatbot
+* [x] QnA Chatbot
 * [ ] Chatbot with Memory
 * [ ] Multi-LLM Chatbot
 * [ ] Google Search AI Agent
