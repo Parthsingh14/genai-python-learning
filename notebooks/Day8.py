@@ -10,7 +10,6 @@ from langchain_tavily import TavilySearch
 
 search = TavilySearch()
 model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
-# print(search.invoke({"query": "Yesterday was FIFA enoguration, did nora fatehi also participated in the starting ceremony?"}))
 
 agent = create_agent(
     model=model,
@@ -18,7 +17,7 @@ agent = create_agent(
     system_prompt="You are a agent and can search for any question on google"
 )
 
-question = "What is happnening in the war iran and america latest news"
+question = "What is happnening in the war iran and america latest news, also mention todays date."
 
 response = agent.invoke({"messages": [{
     "role": "user",

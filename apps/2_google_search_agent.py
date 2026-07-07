@@ -6,6 +6,7 @@ import streamlit as st
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import create_agent
 from langchain_tavily import TavilySearch
+from langgraph.checkpoint.memory import MemorySaver
 
 # LLM + Tool
 model = ChatGoogleGenerativeAI(
@@ -13,10 +14,12 @@ model = ChatGoogleGenerativeAI(
 )
 
 search = TavilySearch()
+memory = MemorySaver()
 
 agent = create_agent(
     model=model,
     tools=[search],
+    checkpointer=memory,
     system_prompt="You are a helpful AI assistant with web search capabilities."
 )
 
@@ -56,9 +59,8 @@ if query:
             with st.spinner("Thinking..."):
 
                 response = agent.invoke(
-                    {
-                        "messages": st.session_state.messages
-                    }
+                    {"messages": st.session_state.messages},
+                    {"configurable": {"thread_id": "1"}}
                 )
 
                 ai_response = response["messages"][-1].content[0]["text"]
