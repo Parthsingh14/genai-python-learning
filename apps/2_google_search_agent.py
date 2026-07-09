@@ -7,19 +7,24 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import create_agent
 from langchain_tavily import TavilySearch
 from langgraph.checkpoint.memory import MemorySaver
+from langchain_groq import ChatGroq
+
 
 # LLM + Tool
 model = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash"
 )
+llm = ChatGroq(model="qwen/qwen3-32b")
 
 search = TavilySearch()
-memory = MemorySaver()
+if "memory" not in st.session_state:
+    st.session_state.memory = MemorySaver()
+    st.session_state.history = []
 
 agent = create_agent(
     model=model,
     tools=[search],
-    checkpointer=memory,
+    checkpointer=st.session_state.memory,
     system_prompt="""
 You are a helpful AI assistant.
 
@@ -46,11 +51,9 @@ st.set_page_config(
 st.title("🤖 AskBuddy Search Agent")
 st.markdown("AI chatbot with Gemini + Tavily Search")
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
+print(st.session_state.memory)
 # Display chat history
-for msg in st.session_state.messages:
+for msg in st.session_state.history:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
@@ -59,7 +62,7 @@ query = st.chat_input("Ask Anything...")
 if query:
 
     # Show user message
-    st.session_state.messages.append(
+    st.session_state.history.append(
         {
             "role": "user",
             "content": query
@@ -79,10 +82,11 @@ if query:
                 )
 
                 ai_response = response["messages"][-1].content[0]["text"]
-
+                print(response)
+                print(ai_response)
                 st.markdown(ai_response)
 
-        st.session_state.messages.append(
+        st.session_state.history.append(
             {
                 "role": "assistant",
                 "content": ai_response
