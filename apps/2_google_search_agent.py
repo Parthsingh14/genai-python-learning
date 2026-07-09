@@ -20,7 +20,22 @@ agent = create_agent(
     model=model,
     tools=[search],
     checkpointer=memory,
-    system_prompt="You are a helpful AI assistant with web search capabilities."
+    system_prompt="""
+You are a helpful AI assistant.
+
+For any question involving:
+- latest news
+- current events
+- sports
+- weather
+- prices
+- recent information
+- today's information
+- this year
+
+ALWAYS use the Tavily search tool before answering.
+Never rely only on your internal knowledge when freshness matters.
+"""
 )
 
 st.set_page_config(
@@ -59,7 +74,7 @@ if query:
             with st.spinner("Thinking..."):
 
                 response = agent.invoke(
-                    {"messages": st.session_state.messages},
+                    {"messages": [{"role":"user","content": query}]},
                     {"configurable": {"thread_id": "1"}}
                 )
 
