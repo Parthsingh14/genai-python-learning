@@ -138,7 +138,7 @@ Projects will be added progressively while learning:
 * [x] Chatbot with Memory
 * [x] Multi-LLM Chatbot
 * [x] Google Search AI Agent
-* [ ] SQL AI Agent
+* [x] SQL AI Agent
 * [ ] PDF QnA RAG System
 * [ ] Agentic RAG Pipeline
 * [ ] End-to-End RAG Chatbot
@@ -153,8 +153,8 @@ Projects will be added progressively while learning:
 * [x] FastAPI Basics
 * [x] Generative AI Fundamentals
 * [x] LangChain
-* [ ] AI Agents
-* [ ] RAG
+* [x] AI Agents
+* [x] RAG
 * [ ] LangGraph
 * [ ] Production GenAI Projects
 
