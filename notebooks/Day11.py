@@ -10,5 +10,8 @@ text_splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=70)
 doc = loader.load()
 
 doc_chunks = text_splitter.split_documents(doc)
-print(len(doc_chunks))
-print(doc_chunks)
+for i, chunk in enumerate(doc_chunks):
+    print("=" * 80)
+    print(f"Chunk {i+1}")
+    print("-" * 80)
+    print(chunk.page_content)
