@@ -139,9 +139,9 @@ Projects will be added progressively while learning:
 * [x] Multi-LLM Chatbot
 * [x] Google Search AI Agent
 * [x] SQL AI Agent
-* [ ] PDF QnA RAG System
-* [ ] Agentic RAG Pipeline
-* [ ] End-to-End RAG Chatbot
+* [x] PDF QnA RAG System
+* [x] Agentic RAG Pipeline
+* [x] End-to-End RAG Chatbot
 * [ ] LangGraph Multi-Agent System
 * [ ] Human-in-the-loop AI Agent
 
