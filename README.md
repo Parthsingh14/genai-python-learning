@@ -142,8 +142,8 @@ Projects will be added progressively while learning:
 * [x] PDF QnA RAG System
 * [x] Agentic RAG Pipeline
 * [x] End-to-End RAG Chatbot
-* [ ] LangGraph Multi-Agent System
-* [ ] Human-in-the-loop AI Agent
+* [x] LangGraph Multi-Agent System
+* [x] Human-in-the-loop AI Agent
 
 ---
 
@@ -155,7 +155,7 @@ Projects will be added progressively while learning:
 * [x] LangChain
 * [x] AI Agents
 * [x] RAG
-* [ ] LangGraph
+* [x] LangGraph
 * [ ] Production GenAI Projects
 
 ---
