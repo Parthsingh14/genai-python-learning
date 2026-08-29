@@ -3,7 +3,7 @@ from pydantic import BaseModel
 class BlogState(BaseModel):
     ### User input
     topic: str = ""
-    audience: str = ""
+    audience: str = "general readers"
 
     ### Researcher Output
     research: str = ""
