@@ -1,6 +1,6 @@
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import InMemorySaver
-from langgraph.types import Interrupt, Command
+from langgraph.types import interrupt
 
 from typing import Literal
 
@@ -28,8 +28,8 @@ def researcher_node(state: BlogState):
 
 def human_review_research_node(state: BlogState):
     """Pause and ask the human to approve the research or send the feedback"""
-    decision = Interrupt({
-        "stage":"researcher review",
+    decision = interrupt({
+        "stage":"researcher_review",
         "research": state.research,
         "instructions": (
             "Reply with 'Approve' to continue to writing.",
@@ -58,7 +58,8 @@ def writer_node(state: BlogState):
             llm=llm,
             topic=state.topic,
             audience=state.audience,
-            feedback= state.draft_feedback
+            feedback= state.draft_feedback,
+            research= state.research
         )
     
     state.draft = draft_data
@@ -68,7 +69,7 @@ def writer_node(state: BlogState):
 def human_review_writer_node(state: BlogState):
     """Pause and ask the human to approve the draft or send a feedback"""
 
-    decision = Interrupt({
+    decision = interrupt({
         "stage": "draft_review",
         "draft": state.draft,
         "instructions": (
@@ -83,7 +84,10 @@ def human_review_writer_node(state: BlogState):
             text = str(decision)
             action = "approve" if text.lower() in ["approve", "ok","yes","process",""] else "revise"
             feedback = "" if action == "approve" else text
-    
+
+    if feedback:
+         state.review_count += 1
+
     state.draft_feedback = feedback
     return state
 

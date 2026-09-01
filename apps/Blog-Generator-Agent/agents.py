@@ -19,7 +19,7 @@ def get_llm():
 ###Agents
 
 ###Researcher prompt and agent
-RESERSCHER_PROMPT = ChatPromptTemplate.from_messages([
+RESEARCHER_PROMPT = ChatPromptTemplate.from_messages([
     {"role": "system" , "content": """
     You are a Research Agent. Given a blog topic and target audience, produce a clear, structured research outline. 
     Include:
@@ -32,12 +32,12 @@ RESERSCHER_PROMPT = ChatPromptTemplate.from_messages([
     ])
 
 def researcher_agent(llm: ChatGroq, topic:str, audience:str, feedback:str ="") -> str:
-    revision_hints = f"The human provided this feedback on your previous reasearch - please address it: {feedback}."
+    revision_hints = f"The human provided this feedback on your previous research - please address it: {feedback}."
     if not feedback:
         revision_hints = "This is your first attempt."
 
 
-    chain = RESERSCHER_PROMPT | llm
+    chain = RESEARCHER_PROMPT | llm
 
     result = chain.invoke({
         "topic": topic,
@@ -72,7 +72,7 @@ WRITER_PROMPT = ChatPromptTemplate.from_messages([
     ])
 
 def writer_agent(llm: ChatGroq, topic:str, audience:str, feedback:str ="" , research:str ="") -> str:
-    revision_hints = f"The human provided this feedback on your previous draft and asked for this changes: {feedback}. Please apply these changes during writting the blog."
+    revision_hints = f"The human provided this feedback on your previous draft and asked for this changes: {feedback}. Please apply these whchanges during writting the blog."
     if not feedback:
         revision_hints = "This is your first attempt."
 
